@@ -484,6 +484,57 @@ def min_window(s: str, t: str) -> str:
 `,
   },
   {
+    id: "lowest-common-ancestor-of-a-binary-tree",
+    number: 236,
+    title: "Lowest Common Ancestor of a Binary Tree",
+    difficulty: "Medium",
+    priority: "High Value",
+    pattern: "DFS + Tree",
+    summary:
+      "Given a binary tree and two nodes, find the deepest node that is an ancestor of both.",
+    whyItMatters:
+      "LCA is a fundamental tree question that tests recursive thinking and the ability to propagate information up the call stack. It appears frequently in interviews as a standalone problem and as a building block for harder tree problems.",
+    strategy: [
+      "Recurse into both left and right subtrees looking for p and q.",
+      "If the current node is p or q, return it immediately without searching further.",
+      "If both subtrees return a non-null result, the current node is the LCA; otherwise propagate whichever side found something.",
+    ],
+    pitfalls: [
+      "The base case must return null for missing nodes and return the node itself when it matches p or q.",
+      "Do not assume the tree is a BST — you cannot use value comparisons to navigate.",
+    ],
+    complexity: {
+      time: "O(n)",
+      space: "O(h) where h is the tree height",
+    },
+    code: String.raw`from typing import Optional
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+def lowest_common_ancestor(
+    root: Optional[TreeNode],
+    p: TreeNode,
+    q: TreeNode,
+) -> Optional[TreeNode]:
+    if root is None or root is p or root is q:
+        return root
+
+    left = lowest_common_ancestor(root.left, p, q)
+    right = lowest_common_ancestor(root.right, p, q)
+
+    if left and right:
+        return root
+
+    return left if left else right
+`,
+  },
+  {
     id: "search-in-rotated-sorted-array",
     number: 33,
     title: "Search in Rotated Sorted Array",
