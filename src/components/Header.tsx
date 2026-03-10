@@ -1,3 +1,5 @@
+import { GitHubActions } from "./GitHubActions";
+
 interface HeaderProps {
   problemCount: number;
   theme: "dark" | "light";
@@ -11,19 +13,22 @@ export function Header({ problemCount, theme, onToggleTheme }: HeaderProps) {
         <div className="eyebrow">
           Public interview sprint for software engineers
         </div>
-        <button
-          type="button"
-          className="theme-toggle"
-          onClick={onToggleTheme}
-          aria-label={
-            theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
-          }
-        >
-          <span className="theme-toggle-icon" aria-hidden="true">
-            {theme === "dark" ? "☀" : "☾"}
-          </span>
-          {theme === "dark" ? "Light theme" : "Dark theme"}
-        </button>
+        <div className="hero-controls">
+          <GitHubActions />
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={onToggleTheme}
+            aria-label={
+              theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+            }
+          >
+            <span className="theme-toggle-icon" aria-hidden="true">
+              {theme === "dark" ? "☀" : "☾"}
+            </span>
+            {theme === "dark" ? "Light theme" : "Dark theme"}
+          </button>
+        </div>
       </div>
       <h1>LeetSprint</h1>
       <p className="hero-copy">
